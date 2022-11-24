@@ -1,0 +1,27 @@
+import "pe"
+
+rule SimpleRule {
+     strings:
+       $a = "hello"
+
+     condition:
+       any of them
+}
+
+
+// This rule is not valid because Velociraptor's yara is built without
+// openssl.
+rule NumberOfSignatures {
+     strings:
+       $a = "hello"
+
+     condition:
+       pe.number_of_signatures == 1 and $a
+}
+
+
+rule is_pe
+{
+    condition:
+        pe.is_pe
+}
